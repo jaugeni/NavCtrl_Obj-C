@@ -22,9 +22,9 @@
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
     self.navigationItem.rightBarButtonItem = editButton;
     
-    
     self.companyList = @[@"Apple mobile devices",@"Samsung mobile devices", @"Google", @"Tesla"];
     self.title = @"Mobile device makers";
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -70,8 +70,15 @@
     }
     
     // Configure the cell...
+    UIImage* image;
+    NSString* companyNameString = [self.companyList objectAtIndex:[indexPath row]];
+    if ((image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", companyNameString]])) {
+        cell.imageView.image = image;
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"emptystate-homeView.png"];
+    }
+    cell.textLabel.text = companyNameString;
     
-    cell.textLabel.text = [self.companyList objectAtIndex:[indexPath row]];
     
     return cell;
 }
@@ -138,14 +145,14 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (void)dealloc {
     [_tableView release];
