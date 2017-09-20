@@ -23,7 +23,7 @@
     self.navigationItem.rightBarButtonItem = editButton;
     
     
-    self.companyList = @[@"Apple mobile devices",@"Samsung mobile devices"];
+    self.companyList = @[@"Apple mobile devices",@"Samsung mobile devices", @"Google", @"Tesla"];
     self.title = @"Mobile device makers";
     // Do any additional setup after loading the view from its nib.
 }
