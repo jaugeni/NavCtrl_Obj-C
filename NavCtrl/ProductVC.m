@@ -26,8 +26,12 @@
     
     if ([self.title isEqualToString:@"Apple mobile devices"]) {
         self.products = @[@"iPad", @"iPod Touch",@"iPhone"];
-    } else {
+    } else if ([self.title isEqualToString:@"Samsung mobile devices"]) {
         self.products = @[@"Galaxy S4", @"Galaxy Note", @"Galaxy Tab"];
+    } else if ([self.title isEqualToString:@"Google"]) {
+        self.products = @[@"google.com", @"google pixel", @"Chrome"];
+    } else if ([self.title isEqualToString: @"Tesla"]) {
+        self.products = @[@"Model X", @"Powerwall", @"Solar Panels"];
     }
     [self.tableView reloadData];
 }
