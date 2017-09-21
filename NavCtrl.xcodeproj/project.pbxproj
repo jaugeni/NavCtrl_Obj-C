@@ -25,6 +25,8 @@
 		9E62FF261E4A33F1002D55B8 /* ProductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E62FF241E4A33F1002D55B8 /* ProductVC.m */; };
 		9E62FF271E4A33F1002D55B8 /* ProductVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E62FF251E4A33F1002D55B8 /* ProductVC.xib */; };
 		9E62FF291E4A3982002D55B8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E62FF281E4A3982002D55B8 /* Launch Screen.storyboard */; };
+		A32454B91F745C1900D3D8F1 /* ProductClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454B81F745C1900D3D8F1 /* ProductClass.m */; };
+		A32454BD1F745C4200D3D8F1 /* CompanyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454BC1F745C4200D3D8F1 /* CompanyClass.m */; };
 		A3BAF2541F73010700625416 /* ProductLinkVc.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BAF2521F73010700625416 /* ProductLinkVc.m */; };
 		A3BAF2551F73010700625416 /* ProductLinkVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3BAF2531F73010700625416 /* ProductLinkVc.xib */; };
 		A3BAF2571F73226900625416 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BAF2561F73226800625416 /* WebKit.framework */; };
@@ -65,6 +67,10 @@
 		9E62FF241E4A33F1002D55B8 /* ProductVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductVC.m; sourceTree = "<group>"; };
 		9E62FF251E4A33F1002D55B8 /* ProductVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductVC.xib; sourceTree = "<group>"; };
 		9E62FF281E4A3982002D55B8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A32454B71F745C1900D3D8F1 /* ProductClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductClass.h; sourceTree = "<group>"; };
+		A32454B81F745C1900D3D8F1 /* ProductClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductClass.m; sourceTree = "<group>"; };
+		A32454BB1F745C4200D3D8F1 /* CompanyClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyClass.h; sourceTree = "<group>"; };
+		A32454BC1F745C4200D3D8F1 /* CompanyClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyClass.m; sourceTree = "<group>"; };
 		A3BAF2511F73010700625416 /* ProductLinkVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLinkVc.h; sourceTree = "<group>"; };
 		A3BAF2521F73010700625416 /* ProductLinkVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductLinkVc.m; sourceTree = "<group>"; };
 		A3BAF2531F73010700625416 /* ProductLinkVc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductLinkVc.xib; sourceTree = "<group>"; };
@@ -163,6 +169,8 @@
 				483796CC1BCBF7C70062D5AB /* ParentViewController */,
 				483796CD1BCBF7EB0062D5AB /* ProductViewController */,
 				A3BAF24F1F72FEC900625416 /* ProductLinkVC */,
+				A32454BE1F745C6800D3D8F1 /* ProductsClass */,
+				A32454BA1F745C2700D3D8F1 /* CompanyClass */,
 				48A656C618163BF200746D36 /* Images.xcassets */,
 				48A656BB18163BF200746D36 /* Supporting Files */,
 			);
@@ -198,6 +206,24 @@
 				48A656D618163BF200746D36 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A32454BA1F745C2700D3D8F1 /* CompanyClass */ = {
+			isa = PBXGroup;
+			children = (
+				A32454BB1F745C4200D3D8F1 /* CompanyClass.h */,
+				A32454BC1F745C4200D3D8F1 /* CompanyClass.m */,
+			);
+			name = CompanyClass;
+			sourceTree = "<group>";
+		};
+		A32454BE1F745C6800D3D8F1 /* ProductsClass */ = {
+			isa = PBXGroup;
+			children = (
+				A32454B71F745C1900D3D8F1 /* ProductClass.h */,
+				A32454B81F745C1900D3D8F1 /* ProductClass.m */,
+			);
+			name = ProductsClass;
 			sourceTree = "<group>";
 		};
 		A3BAF24F1F72FEC900625416 /* ProductLinkVC */ = {
@@ -315,7 +341,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E62FF211E4A33DC002D55B8 /* CompanyVC.m in Sources */,
+				A32454BD1F745C4200D3D8F1 /* CompanyClass.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
+				A32454B91F745C1900D3D8F1 /* ProductClass.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
 				9E62FF261E4A33F1002D55B8 /* ProductVC.m in Sources */,
 				A3BAF2541F73010700625416 /* ProductLinkVc.m in Sources */,

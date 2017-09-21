@@ -8,7 +8,9 @@
 
 #import "CompanyVC.h"
 
+
 @interface CompanyVC ()
+
 
 @end
 
@@ -22,11 +24,20 @@
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
     self.navigationItem.rightBarButtonItem = editButton;
     
+    self.apple = [[CompanyClass alloc] init];
+    self.samsung = [[CompanyClass alloc] init];
+    self.tesla = [[CompanyClass alloc] init];
+    self.google = [[CompanyClass alloc] init];
+    
+    self.apple.companyName = @"Apple inc";
+    self.samsung.companyName = @"Samsung inc";
+    self.tesla.companyName = @"Tesla inc";
+    self.google.companyName = @"Google inc";
     
     self.companyList = [NSMutableArray arrayWithCapacity:1];
-    [self.companyList addObjectsFromArray:@[@"Apple mobile devices",@"Samsung mobile devices", @"Google", @"Tesla"]];
+    [self.companyList addObjectsFromArray:@[self.apple.companyName, self.samsung.companyName, self.google.companyName, self.tesla.companyName]];
     
-    self.title = @"Mobile device makers";
+    self.title = @"Company";
     
     // Do any additional setup after loading the view from its nib.
 }
