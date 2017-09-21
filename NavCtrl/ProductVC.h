@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductLinkVc.h"
 
 @interface ProductVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) NSArray *products;
-
+@property (nonatomic, retain) NSMutableArray *products;
+@property (nonatomic, retain) ProductLinkVc *productLinkVC;
 @end
