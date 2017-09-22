@@ -15,5 +15,5 @@
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *companyList;
 @property (nonatomic, retain) ProductVC *productViewController;
-@property (nonatomic, retain) CompanyClass* companyName;
+@property (nonatomic, retain) CompanyClass* currentCompany;
 @end

@@ -78,13 +78,13 @@
     
     // Configure the cell...
     UIImage* image;
-    self.companyName = [self.companyList objectAtIndex:[indexPath row]];
-    if ((image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", self.companyName.companyName]])) {
+    self.currentCompany = [self.companyList objectAtIndex:[indexPath row]];
+    if ((image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", self.currentCompany.companyName]])) {
         cell.imageView.image = image;
     } else {
         cell.imageView.image = [UIImage imageNamed:@"emptystate-homeView.png"];
     }
-    cell.textLabel.text = self.companyName.companyName;
+    cell.textLabel.text = self.currentCompany.companyName;
     cell.showsReorderControl = YES;
     
     return cell;
@@ -141,11 +141,11 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.companyName = [self.companyList objectAtIndex:[indexPath row]];
+    self.currentCompany = [self.companyList objectAtIndex:[indexPath row]];
     self.productViewController = [[ProductVC alloc]init];
     
-    self.productViewController.title = self.companyName.companyName;
-    self.productViewController.company = self.companyName;
+    self.productViewController.title = self.currentCompany.companyName;
+    self.productViewController.products = self.currentCompany.products;
     
     
     [self.navigationController

@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductLinkVc.h"
-#import "CompanyClass.h"
 
 @interface ProductVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *products;
 @property (nonatomic, retain) ProductLinkVc *productLinkVC;
-@property (nonatomic, retain) CompanyClass *company;
+
 @end

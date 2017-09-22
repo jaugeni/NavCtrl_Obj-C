@@ -42,8 +42,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-
-    self.products = self.company.products;
     
     [self.tableView reloadData];
     
@@ -80,9 +78,9 @@
     }
     // Configure the cell...
     
-    ProductClass* productName = [self.products objectAtIndex:[indexPath row]];
+    ProductClass* product = [self.products objectAtIndex:[indexPath row]];
     
-    cell.textLabel.text = productName.productName;
+    cell.textLabel.text = product.productName;
     cell.showsReorderControl = YES;
     return cell;
     
@@ -137,9 +135,9 @@
     // Navigation logic may go here, for example:
     // Create the next view controller.
     self.productLinkVC = [[ProductLinkVc alloc]init];
-    ProductClass* productName = [self.products objectAtIndex:[indexPath row]];
+    ProductClass* product = [self.products objectAtIndex:[indexPath row]];
     
-    self.productLinkVC.title = productName.productName;
+    self.productLinkVC.title = product.productName;
     
     // Pass the selected object to the new view controller.
     

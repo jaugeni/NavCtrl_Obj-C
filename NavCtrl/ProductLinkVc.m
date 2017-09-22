@@ -33,19 +33,7 @@
     NSURL *url = [NSURL URLWithString:@"https://www.chase.com"];
     NSURLRequest *myRequest = [NSURLRequest requestWithURL:url];
     [self.web loadRequest:myRequest];
-    
-//    NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
-//                                          dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//
-//                                              [self.webView loadRequest:myRequest];
-//
-//                                              if (!error){
-//                                                  [self.webView loadRequest:myRequest];
-//                                              }
-//                                              // 4: Handle response here
-//                                          }];
-//
-//    [downloadTask resume];
+
 }
 
 - (void)didReceiveMemoryWarning {
