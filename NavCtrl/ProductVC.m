@@ -20,24 +20,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     // Do any additional setup after loading the view from its nib.
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
-    self.navigationItem.rightBarButtonItem = editButton;
+//    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(toggleAddMode)];
+    
+//    self.navigationItem.leftBarButtonItem = editButton;
+    self.navigationItem.rightBarButtonItem = addButton;
 }
 
-- (void)toggleEditMode {
-    
-    if (self.tableView.editing) {
-        [self.tableView setEditing:NO animated:YES];
-        self.navigationItem.rightBarButtonItem.title = @"Edit";
-    } else {
-        [self.tableView setEditing:YES animated:NO];
-        self.navigationItem.rightBarButtonItem.title = @"Done";
-    }
-    
-}
+//- (void)toggleEditMode {
+//    
+//    if (self.tableView.editing) {
+//        [self.tableView setEditing:NO animated:YES];
+//        self.navigationItem.rightBarButtonItem.title = @"Edit";
+//    } else {
+//        [self.tableView setEditing:YES animated:NO];
+//        self.navigationItem.rightBarButtonItem.title = @"Done";
+//    }
+//    
+//}
 
+-(void)toggleAddMode {
+    
+    AddProductVC* addProductVC = [[AddProductVC alloc]init];
+    addProductVC.title = @"Add Company";
+    addProductVC.products = self.products;
+    
+    
+    [self.navigationController pushViewController:addProductVC animated:YES];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -53,18 +64,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+//#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+//#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.products count];
 }

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductLinkVc.h"
+#import "AddProductVC.h"
 
 @interface ProductVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 

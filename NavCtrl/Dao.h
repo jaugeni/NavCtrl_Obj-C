@@ -15,4 +15,6 @@
 
 @property (nonatomic,retain) NSMutableArray *companyList;
 
+-(void)addNewCompany:(NSString*)name;
+-(void)addNewProduct:(NSString*)name withCompany:(NSMutableArray*)array;
 @end

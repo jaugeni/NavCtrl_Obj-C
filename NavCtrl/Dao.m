@@ -16,13 +16,32 @@
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _sharedInstance = [[self alloc] init];
-        [_sharedInstance createObjects];
+        [_sharedInstance createCompanye];
     });
     
     return _sharedInstance;
 }
 
--(void)createObjects{
+-(void)addNewCompany:(NSString*)name{
+    
+    CompanyClass *tempCompany = [[CompanyClass alloc] init];
+    tempCompany.companyName = name;
+    tempCompany.products = [[NSMutableArray alloc] init];
+    [self.companyList addObject:tempCompany];
+}
+
+-(void)addNewProduct:(NSString*)name withCompany:(NSMutableArray*)array{
+    
+    ProductClass *tempProduct = [[ProductClass alloc] init];
+    tempProduct.productName = name;
+    [array addObject:tempProduct];
+}
+
+
+
+-(void)createCompanye{
+    
+    
     CompanyClass *apple = [[CompanyClass alloc] init];
     CompanyClass *samsung = [[CompanyClass alloc] init];
     CompanyClass *tesla = [[CompanyClass alloc] init];

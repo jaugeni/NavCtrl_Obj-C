@@ -23,28 +23,42 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
-    self.navigationItem.rightBarButtonItem = editButton;
-    Dao *dao = [Dao sharedDao];
-
-    self.companyList = dao.companyList;
-  
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(toggleAddMode)];
+    
+    self.navigationItem.leftBarButtonItem = editButton;
+    self.navigationItem.rightBarButtonItem = addButton;
+    
     self.title = @"Company";
     
+    Dao *dao = [Dao sharedDao];
+    self.companyList = dao.companyList;
     
-    
+
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.companyList = [[Dao sharedDao] companyList];
+    [self.tableView reloadData];
 }
 
 - (void)toggleEditMode {
     
     if (self.tableView.editing) {
         [self.tableView setEditing:NO animated:YES];
-        self.navigationItem.rightBarButtonItem.title = @"Edit";
+        self.navigationItem.leftBarButtonItem.title = @"Edit";
     } else {
         [self.tableView setEditing:YES animated:NO];
-        self.navigationItem.rightBarButtonItem.title = @"Done";
+        self.navigationItem.leftBarButtonItem.title = @"Done";
     }
     
+}
+
+-(void)toggleAddMode {
+    
+    AddCompanyVc* addCompanyVC = [[AddCompanyVc alloc]init];
+    addCompanyVC.title = @"Add Company";
+    [self.navigationController pushViewController:addCompanyVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,14 +70,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+//#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.companyList count];
 }
