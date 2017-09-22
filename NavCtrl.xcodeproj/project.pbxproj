@@ -27,6 +27,7 @@
 		9E62FF291E4A3982002D55B8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E62FF281E4A3982002D55B8 /* Launch Screen.storyboard */; };
 		A32454B91F745C1900D3D8F1 /* ProductClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454B81F745C1900D3D8F1 /* ProductClass.m */; };
 		A32454BD1F745C4200D3D8F1 /* CompanyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454BC1F745C4200D3D8F1 /* CompanyClass.m */; };
+		A32454C21F746C8200D3D8F1 /* Dao.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454C11F746C8200D3D8F1 /* Dao.m */; };
 		A3BAF2541F73010700625416 /* ProductLinkVc.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BAF2521F73010700625416 /* ProductLinkVc.m */; };
 		A3BAF2551F73010700625416 /* ProductLinkVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3BAF2531F73010700625416 /* ProductLinkVc.xib */; };
 		A3BAF2571F73226900625416 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BAF2561F73226800625416 /* WebKit.framework */; };
@@ -71,6 +72,8 @@
 		A32454B81F745C1900D3D8F1 /* ProductClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductClass.m; sourceTree = "<group>"; };
 		A32454BB1F745C4200D3D8F1 /* CompanyClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyClass.h; sourceTree = "<group>"; };
 		A32454BC1F745C4200D3D8F1 /* CompanyClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyClass.m; sourceTree = "<group>"; };
+		A32454C01F746C8200D3D8F1 /* Dao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dao.h; sourceTree = "<group>"; };
+		A32454C11F746C8200D3D8F1 /* Dao.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dao.m; sourceTree = "<group>"; };
 		A3BAF2511F73010700625416 /* ProductLinkVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLinkVc.h; sourceTree = "<group>"; };
 		A3BAF2521F73010700625416 /* ProductLinkVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductLinkVc.m; sourceTree = "<group>"; };
 		A3BAF2531F73010700625416 /* ProductLinkVc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductLinkVc.xib; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 				A3BAF24F1F72FEC900625416 /* ProductLinkVC */,
 				A32454BE1F745C6800D3D8F1 /* ProductsClass */,
 				A32454BA1F745C2700D3D8F1 /* CompanyClass */,
+				A32454BF1F746C5000D3D8F1 /* Dao */,
 				48A656C618163BF200746D36 /* Images.xcassets */,
 				48A656BB18163BF200746D36 /* Supporting Files */,
 			);
@@ -224,6 +228,15 @@
 				A32454B81F745C1900D3D8F1 /* ProductClass.m */,
 			);
 			name = ProductsClass;
+			sourceTree = "<group>";
+		};
+		A32454BF1F746C5000D3D8F1 /* Dao */ = {
+			isa = PBXGroup;
+			children = (
+				A32454C01F746C8200D3D8F1 /* Dao.h */,
+				A32454C11F746C8200D3D8F1 /* Dao.m */,
+			);
+			name = Dao;
 			sourceTree = "<group>";
 		};
 		A3BAF24F1F72FEC900625416 /* ProductLinkVC */ = {
@@ -344,6 +357,7 @@
 				A32454BD1F745C4200D3D8F1 /* CompanyClass.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				A32454B91F745C1900D3D8F1 /* ProductClass.m in Sources */,
+				A32454C21F746C8200D3D8F1 /* Dao.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
 				9E62FF261E4A33F1002D55B8 /* ProductVC.m in Sources */,
 				A3BAF2541F73010700625416 /* ProductLinkVc.m in Sources */,

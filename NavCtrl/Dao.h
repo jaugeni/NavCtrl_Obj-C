@@ -1,5 +1,5 @@
 //
-//  CompanyClass.h
+//  Dao.h
 //  NavCtrl
 //
 //  Created by YAUHENI IVANIUK on 9/21/17.
@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CompanyClass.h"
 #import "ProductClass.h"
 
-@interface CompanyClass : NSObject
-@property (nonatomic, retain) NSString* companyName;
-@property (nonatomic, retain) NSMutableArray<ProductClass*>* products;
+@interface Dao : NSObject
++ (Dao *)sharedDao;
+
+@property (nonatomic,retain) NSMutableArray *companyList;
+
 @end

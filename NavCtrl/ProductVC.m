@@ -7,21 +7,12 @@
 //
 
 #import "ProductVC.h"
-#import "ProductClass.h"
+#import "Dao.h"
+
+
 
 @interface ProductVC ()
-@property (nonatomic)ProductClass *iPad;
-@property (nonatomic)ProductClass *iPodTouch;
-@property (nonatomic)ProductClass *iPhone;
-@property (nonatomic)ProductClass *galaxyS4;
-@property (nonatomic)ProductClass *galaxyNote;
-@property (nonatomic)ProductClass *galaxyTab;
-@property (nonatomic)ProductClass *googleCom;
-@property (nonatomic)ProductClass *pixel;
-@property (nonatomic)ProductClass *chrome;
-@property (nonatomic)ProductClass *modelX;
-@property (nonatomic)ProductClass *powerwall;
-@property (nonatomic)ProductClass *solarPanels;
+
 
 @end
 
@@ -51,44 +42,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    self.products = [NSMutableArray arrayWithCapacity:1];
+
+    self.products = self.company.products;
     
-    self.iPad = [[ProductClass alloc] init];
-    self.iPodTouch = [[ProductClass alloc] init];
-    self.iPhone = [[ProductClass alloc] init];
-    self.galaxyS4 = [[ProductClass alloc] init];
-    self.galaxyNote = [[ProductClass alloc] init];
-    self.galaxyTab = [[ProductClass alloc] init];
-    self.googleCom = [[ProductClass alloc] init];
-    self.pixel = [[ProductClass alloc] init];
-    self.chrome = [[ProductClass alloc] init];
-    self.modelX = [[ProductClass alloc] init];
-    self.powerwall = [[ProductClass alloc] init];
-    self.solarPanels = [[ProductClass alloc] init];
-    
-    self.iPad.productName = @"iPad";
-    self.iPodTouch.productName = @"iPod Touch";
-    self.iPhone.productName = @"iPhone";
-    self.galaxyS4.productName = @"Galaxy S4";
-    self.galaxyNote.productName = @"Galaxy Note";
-    self.galaxyTab.productName = @"Galaxy Tab";
-    self.googleCom.productName = @"google.com";
-    self.pixel.productName = @"google pixel";
-    self.chrome.productName = @"Chrome";
-    self.modelX.productName = @"Model X";
-    self.powerwall.productName = @"Powerwall";
-    self.solarPanels.productName = @"Solar Panels";
-    
-    if ([self.title isEqualToString:@"Apple inc"]) {
-        [self.products addObjectsFromArray:@[self.iPad.productName, self.iPodTouch.productName, self.iPhone.productName]];
-    } else if ([self.title isEqualToString:@"Samsung inc"]) {
-        [self.products addObjectsFromArray:@[self.galaxyS4.productName, self.galaxyNote.productName, self.galaxyTab.productName]];
-    } else if ([self.title isEqualToString:@"Google inc"]) {
-        [self.products addObjectsFromArray:@[self.googleCom.productName, self.pixel.productName, self.chrome.productName]];
-    } else if ([self.title isEqualToString: @"Tesla inc"]) {
-        [self.products addObjectsFromArray:@[self.modelX.productName, self.powerwall.productName, self.solarPanels.productName]];
-    }
-        [self.tableView reloadData];
+    [self.tableView reloadData];
     
 }
 
@@ -122,9 +79,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    cell.textLabel.text = [self.products objectAtIndex:[indexPath row]];
+    
+    ProductClass* productName = [self.products objectAtIndex:[indexPath row]];
+    
+    cell.textLabel.text = productName.productName;
     cell.showsReorderControl = YES;
     return cell;
+    
 }
 
 
@@ -176,8 +137,9 @@
     // Navigation logic may go here, for example:
     // Create the next view controller.
     self.productLinkVC = [[ProductLinkVc alloc]init];
+    ProductClass* productName = [self.products objectAtIndex:[indexPath row]];
     
-    self.productLinkVC.title = [self.products objectAtIndex:[indexPath row]];
+    self.productLinkVC.title = productName.productName;
     
     // Pass the selected object to the new view controller.
     

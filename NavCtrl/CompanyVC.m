@@ -7,6 +7,7 @@
 //
 
 #import "CompanyVC.h"
+#import "Dao.h"
 
 
 @interface CompanyVC ()
@@ -23,21 +24,13 @@
     
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
     self.navigationItem.rightBarButtonItem = editButton;
-    
-    self.apple = [[CompanyClass alloc] init];
-    self.samsung = [[CompanyClass alloc] init];
-    self.tesla = [[CompanyClass alloc] init];
-    self.google = [[CompanyClass alloc] init];
-    
-    self.apple.companyName = @"Apple inc";
-    self.samsung.companyName = @"Samsung inc";
-    self.tesla.companyName = @"Tesla inc";
-    self.google.companyName = @"Google inc";
-    
-    self.companyList = [NSMutableArray arrayWithCapacity:1];
-    [self.companyList addObjectsFromArray:@[self.apple.companyName, self.samsung.companyName, self.google.companyName, self.tesla.companyName]];
-    
+    Dao *dao = [Dao sharedDao];
+
+    self.companyList = dao.companyList;
+  
     self.title = @"Company";
+    
+    
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -85,13 +78,13 @@
     
     // Configure the cell...
     UIImage* image;
-    NSString* companyNameString = [self.companyList objectAtIndex:[indexPath row]];
-    if ((image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", companyNameString]])) {
+    self.companyName = [self.companyList objectAtIndex:[indexPath row]];
+    if ((image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", self.companyName.companyName]])) {
         cell.imageView.image = image;
     } else {
         cell.imageView.image = [UIImage imageNamed:@"emptystate-homeView.png"];
     }
-    cell.textLabel.text = companyNameString;
+    cell.textLabel.text = self.companyName.companyName;
     cell.showsReorderControl = YES;
     
     return cell;
@@ -148,10 +141,11 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    self.companyName = [self.companyList objectAtIndex:[indexPath row]];
     self.productViewController = [[ProductVC alloc]init];
     
-    self.productViewController.title = [self.companyList objectAtIndex:[indexPath row]];
+    self.productViewController.title = self.companyName.companyName;
+    self.productViewController.company = self.companyName;
     
     
     [self.navigationController
