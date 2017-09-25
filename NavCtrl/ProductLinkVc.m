@@ -16,15 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
     
     self.web = [WKWebView new];
     
     [self.view addSubview:self.web];
     
-    
-    // Do any additional setup after loading the view from its nib.
-
+    self.navigationItem.rightBarButtonItem = editButton;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -33,7 +31,18 @@
     NSURL *url = [NSURL URLWithString:@"https://www.chase.com"];
     NSURLRequest *myRequest = [NSURLRequest requestWithURL:url];
     [self.web loadRequest:myRequest];
+    
+    self.title = self.currentProduct.productName;
 
+}
+
+- (void)toggleEditMode {
+    AddEditProduct* addEditProductVC = [[AddEditProduct alloc]init];
+    addEditProductVC.title = @"Edit Product";
+    addEditProductVC.flagIsAddMod = NO;
+    addEditProductVC.currentProductIndex = self.currentProductIndex;
+    addEditProductVC.currentProduct = self.currentProduct;
+    [self.navigationController pushViewController:addEditProductVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

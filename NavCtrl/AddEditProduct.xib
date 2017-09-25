@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddProductVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddEditProduct">
             <connections>
-                <outlet property="addProduct" destination="FGq-Oa-Jko" id="KN0-j8-jU1"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="addEditProductName" destination="FGq-Oa-Jko" id="WYP-g3-8Sg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="ySJ-Gk-BxU"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

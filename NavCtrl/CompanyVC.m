@@ -32,13 +32,14 @@
     
     Dao *dao = [Dao sharedDao];
     self.companyList = dao.companyList;
-    
 
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     self.companyList = [[Dao sharedDao] companyList];
+    self.tableView.editing = NO;
+    self.navigationItem.leftBarButtonItem.title = @"Edit";
     [self.tableView reloadData];
 }
 
@@ -46,9 +47,12 @@
     
     if (self.tableView.editing) {
         [self.tableView setEditing:NO animated:YES];
+        self.tableView.allowsSelectionDuringEditing = NO;
         self.navigationItem.leftBarButtonItem.title = @"Edit";
+        [self.tableView reloadData];
     } else {
         [self.tableView setEditing:YES animated:NO];
+        self.tableView.allowsSelectionDuringEditing = YES;
         self.navigationItem.leftBarButtonItem.title = @"Done";
     }
     
@@ -56,9 +60,10 @@
 
 -(void)toggleAddMode {
     
-    AddCompanyVc* addCompanyVC = [[AddCompanyVc alloc]init];
-    addCompanyVC.title = @"Add Company";
-    [self.navigationController pushViewController:addCompanyVC animated:YES];
+    AddEditCompanyVc* addEditCompanyVc = [[AddEditCompanyVc alloc]init];
+    addEditCompanyVc.title = @"Add Company";
+    addEditCompanyVc.flagIsAddMod = YES;
+    [self.navigationController pushViewController:addEditCompanyVc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,14 +75,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Potentially incomplete method implementation.
+    //#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
+    //#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.companyList count];
 }
@@ -105,48 +110,46 @@
 }
 
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
 
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         
         [self.companyList removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade]; 
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        
+        
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
 }
 
 
-//// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+////// Override to support conditional rearranging of the table view.
+//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Return NO if you do not want the item to be re-orderable.
+//    return YES;
+//}
+
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    [self.companyList exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
 }
-
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
-
-     [self.companyList exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
- }
-
-
-
-
 
 
 
@@ -156,16 +159,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.currentCompany = [self.companyList objectAtIndex:[indexPath row]];
-    self.productViewController = [[ProductVC alloc]init];
-    
-    self.productViewController.title = self.currentCompany.companyName;
-    self.productViewController.products = self.currentCompany.products;
-    
-    
-    [self.navigationController
-     pushViewController:self.productViewController
-     animated:YES];
-    
+    if (tableView.editing == YES) {
+        // Table view is editing - run code here
+        self.companyList = [[Dao sharedDao] companyList];
+        [self.tableView reloadData];
+        AddEditCompanyVc* addEditCompanyVc = [[AddEditCompanyVc alloc]init];
+        addEditCompanyVc.title = @"Edit Company";
+        addEditCompanyVc.flagIsAddMod = NO;
+        addEditCompanyVc.currentCompanyIndex = (int) indexPath.row;
+        [self.navigationController pushViewController:addEditCompanyVc animated:YES];
+    } else {
+        
+        self.productViewController = [[ProductVC alloc]init];
+        self.productViewController.title = self.currentCompany.companyName;
+        self.productViewController.products = self.currentCompany.products;
+        
+        
+        [self.navigationController
+         pushViewController:self.productViewController
+         animated:YES];
+    }
 }
 
 

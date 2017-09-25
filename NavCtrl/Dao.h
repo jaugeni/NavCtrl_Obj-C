@@ -17,4 +17,6 @@
 
 -(void)addNewCompany:(NSString*)name;
 -(void)addNewProduct:(NSString*)name withCompany:(NSMutableArray*)array;
+-(void)editCompany:(NSString*)name withCompanyIndex:(int)index;
+-(void)editProduct:(NSString*)name withProduct:(ProductClass*)currentProduct andProductIndex:(int)index;
 @end

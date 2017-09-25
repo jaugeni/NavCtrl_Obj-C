@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
+#import "AddEditProduct.h"
 
 @interface ProductLinkVc : UIViewController
 
 @property (retain, nonatomic)  WKWebView *web;
-
+@property (nonatomic) int currentProductIndex;
+@property (retain, nonatomic) ProductClass *currentProduct;
 
 
 @end

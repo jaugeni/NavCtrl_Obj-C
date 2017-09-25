@@ -37,6 +37,17 @@
     [array addObject:tempProduct];
 }
 
+-(void)editCompany:(NSString*)name withCompanyIndex:(int)index{
+    CompanyClass* currentCompany = self.companyList[index];
+    currentCompany.companyName = name;
+    [self.companyList replaceObjectAtIndex:index withObject:currentCompany];
+}
+
+-(void)editProduct:(NSString*)name withProduct:(ProductClass*)currentProduct andProductIndex:(int)index{
+        currentProduct.productName = name;
+    [self.companyList replaceObjectAtIndex:index withObject:currentProduct];
+}
+
 
 
 -(void)createCompanye{

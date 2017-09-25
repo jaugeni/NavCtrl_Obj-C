@@ -21,33 +21,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(toggleAddMode)];
     
-//    self.navigationItem.leftBarButtonItem = editButton;
     self.navigationItem.rightBarButtonItem = addButton;
+    
 }
-
-//- (void)toggleEditMode {
-//    
-//    if (self.tableView.editing) {
-//        [self.tableView setEditing:NO animated:YES];
-//        self.navigationItem.rightBarButtonItem.title = @"Edit";
-//    } else {
-//        [self.tableView setEditing:YES animated:NO];
-//        self.navigationItem.rightBarButtonItem.title = @"Done";
-//    }
-//    
-//}
 
 -(void)toggleAddMode {
     
-    AddProductVC* addProductVC = [[AddProductVC alloc]init];
-    addProductVC.title = @"Add Company";
-    addProductVC.products = self.products;
+    AddEditProduct* addEditProductVC = [[AddEditProduct alloc]init];
+    addEditProductVC.title = @"Add Product";
+    addEditProductVC.product = self.products;
+    addEditProductVC.flagIsAddMod = YES;
     
-    
-    [self.navigationController pushViewController:addProductVC animated:YES];
+    [self.navigationController pushViewController:addEditProductVC animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,14 +99,30 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [self.products removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
+    
+    [self tableView:tableView commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
+
+}
+
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *button = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        AddEditProduct* addEditProductVC = [[AddEditProduct alloc]init];
+                                        addEditProductVC.title = @"Edit Product";
+                                        addEditProductVC.flagIsAddMod = NO;
+                                        addEditProductVC.currentProductIndex = (int) indexPath.row;
+                                        addEditProductVC.currentProduct = self.products[indexPath.row];
+                                        [self.navigationController pushViewController:addEditProductVC animated:YES];
+                                    }];
+    button.backgroundColor = [UIColor greenColor]; //arbitrary color
+    UITableViewRowAction *button2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                     {
+                                         [self.products removeObjectAtIndex:indexPath.row];
+                                         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                                     }];
+    button2.backgroundColor = [UIColor redColor]; //arbitrary color
+    
+    return @[button2, button]; //array with all the buttons you want. 1,2,3, etc...
 }
 
 
@@ -143,18 +146,13 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
+ 
     self.productLinkVC = [[ProductLinkVc alloc]init];
     ProductClass* product = [self.products objectAtIndex:[indexPath row]];
     
     self.productLinkVC.title = product.productName;
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    
-    
+//    self.productLinkVC.currentProductIndex = (int) indexPath.row;
+    self.productLinkVC.currentProduct = product;
     [self.navigationController pushViewController:self.productLinkVC animated:YES];
 }
 

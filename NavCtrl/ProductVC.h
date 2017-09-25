@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductLinkVc.h"
-#import "AddProductVC.h"
+#import "AddEditProduct.h"
 
 @interface ProductVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *products;
 @property (nonatomic, retain) ProductLinkVc *productLinkVC;
+@property (nonatomic) BOOL flagIsAddMod;
 
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ProductVC.h"
 #import "CompanyClass.h"
-#import "AddCompanyVc.h"
+#import "AddEditCompanyVc.h"
 
 @interface CompanyVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSMutableArray *companyList;
 @property (nonatomic, retain) ProductVC *productViewController;
 @property (nonatomic, retain) CompanyClass* currentCompany;
+@property (nonatomic) BOOL flagIsAddMod;
 
 @end
