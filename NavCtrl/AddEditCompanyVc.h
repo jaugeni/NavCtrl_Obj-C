@@ -13,6 +13,8 @@
 
 @property (retain, nonatomic) IBOutlet UITextField *addEditCompanyName;
 @property (retain, nonatomic) IBOutlet UITextField *addEditTicker;
+@property (retain, nonatomic) IBOutlet UITextField *addEditImageUrl;
+
 
 @property (nonatomic) BOOL flagIsAddMod;
 @property (nonatomic) int currentCompanyIndex;
