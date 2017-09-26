@@ -9,14 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "CompanyClass.h"
 #import "ProductClass.h"
+#import "StockWork.h"
 
 @interface Dao : NSObject
 + (Dao *)sharedDao;
 
 @property (nonatomic,retain) NSMutableArray *companyList;
 
--(void)addNewCompany:(NSString*)name;
+-(void)addNewCompany:(NSString*)name withTicker:(NSString*)ticker;
+-(void)editCompany:(NSString*)name withTicker:(NSString*)ticker andCompanyIndex:(int)index;
+
 -(void)addNewProduct:(NSString*)name withCompany:(NSMutableArray*)array;
--(void)editCompany:(NSString*)name withCompanyIndex:(int)index;
 -(void)editProduct:(NSString*)name withProduct:(ProductClass*)currentProduct andProductIndex:(int)index;
 @end

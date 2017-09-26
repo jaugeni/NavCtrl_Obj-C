@@ -10,4 +10,6 @@
 
 @interface ProductClass : NSObject
 @property (nonatomic, retain) NSString* productName;
+@property (nonatomic, retain) NSURL* productUrl;
+@property (nonatomic, retain) UIImage* image;
 @end

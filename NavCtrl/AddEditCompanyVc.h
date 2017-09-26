@@ -12,6 +12,8 @@
 @interface AddEditCompanyVc : UIViewController<UITextFieldDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextField *addEditCompanyName;
+@property (retain, nonatomic) IBOutlet UITextField *addEditTicker;
+
 @property (nonatomic) BOOL flagIsAddMod;
 @property (nonatomic) int currentCompanyIndex;
 

@@ -8,6 +8,7 @@
 
 #import "CompanyVC.h"
 #import "Dao.h"
+#import "StockWork.h"
 
 
 @interface CompanyVC ()
@@ -34,6 +35,8 @@
     self.companyList = dao.companyList;
 
     // Do any additional setup after loading the view from its nib.
+    
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -41,6 +44,9 @@
     self.tableView.editing = NO;
     self.navigationItem.leftBarButtonItem.title = @"Edit";
     [self.tableView reloadData];
+    StockWork* stockWork = [[StockWork alloc] init];
+    [stockWork getStockPrice];
+    [stockWork setTable:self.tableView];
 }
 
 - (void)toggleEditMode {
@@ -92,7 +98,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -103,7 +109,8 @@
     } else {
         cell.imageView.image = [UIImage imageNamed:@"emptystate-homeView.png"];
     }
-    cell.textLabel.text = self.currentCompany.companyName;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.currentCompany.companyName, self.currentCompany.stockTicker];
+    cell.detailTextLabel.text = self.currentCompany.currentPrice;
     cell.showsReorderControl = YES;
     
     return cell;

@@ -22,12 +22,28 @@
     return _sharedInstance;
 }
 
--(void)addNewCompany:(NSString*)name{
-    
+-(void)addNewCompany:(NSString*)name withTicker:(NSString*)ticker{
     CompanyClass *tempCompany = [[CompanyClass alloc] init];
     tempCompany.companyName = name;
+    if ([ticker isEqualToString:@""])  {
+        tempCompany.stockTicker = @"N/A";
+    } else {
+        tempCompany.stockTicker = ticker;
+    }
+    tempCompany.currentPrice = [[NSString alloc] init];
     tempCompany.products = [[NSMutableArray alloc] init];
     [self.companyList addObject:tempCompany];
+}
+
+-(void)editCompany:(NSString*)name withTicker:(NSString*)ticker andCompanyIndex:(int)index{
+    CompanyClass* currentCompany = self.companyList[index];
+    currentCompany.companyName = name;
+    if (ticker == NULL) {
+        currentCompany.stockTicker = @"N/A";
+    } else {
+        currentCompany.stockTicker = ticker;
+    }
+    [self.companyList replaceObjectAtIndex:index withObject:currentCompany];
 }
 
 -(void)addNewProduct:(NSString*)name withCompany:(NSMutableArray*)array{
@@ -37,14 +53,8 @@
     [array addObject:tempProduct];
 }
 
--(void)editCompany:(NSString*)name withCompanyIndex:(int)index{
-    CompanyClass* currentCompany = self.companyList[index];
-    currentCompany.companyName = name;
-    [self.companyList replaceObjectAtIndex:index withObject:currentCompany];
-}
-
 -(void)editProduct:(NSString*)name withProduct:(ProductClass*)currentProduct andProductIndex:(int)index{
-        currentProduct.productName = name;
+    currentProduct.productName = name;
     [self.companyList replaceObjectAtIndex:index withObject:currentProduct];
 }
 
@@ -52,16 +62,23 @@
 
 -(void)createCompanye{
     
-    
     CompanyClass *apple = [[CompanyClass alloc] init];
     CompanyClass *samsung = [[CompanyClass alloc] init];
     CompanyClass *tesla = [[CompanyClass alloc] init];
     CompanyClass *google = [[CompanyClass alloc] init];
     
     apple.companyName = @"Apple inc";
+    apple.stockTicker = @"AAPL";
+    apple.currentPrice = [[NSString alloc] init];
     samsung.companyName = @"Samsung inc";
+    samsung.stockTicker = @"N/A";
+    samsung.currentPrice = [[NSString alloc] init];
     tesla.companyName = @"Tesla inc";
+    tesla.stockTicker = @"TSLA";
+    tesla.currentPrice = [[NSString alloc] init];
     google.companyName = @"Google inc";
+    google.stockTicker = @"GOOGL";
+    google.currentPrice = [[NSString alloc] init];
     
     ProductClass* iPad = [[ProductClass alloc] init];
     ProductClass* iPodTouch = [[ProductClass alloc] init];
@@ -97,5 +114,6 @@
     google.products = [[NSMutableArray alloc] initWithArray:@[googleCom,pixel,chrome]];
     tesla.products = [[NSMutableArray alloc] initWithArray:@[modelX,powerwall,solarPanels]];
     samsung.products = [[NSMutableArray alloc] initWithArray:@[galaxyS4,galaxyTab,galaxyNote]];
+    
 }
 @end

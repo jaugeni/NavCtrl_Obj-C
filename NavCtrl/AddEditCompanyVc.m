@@ -27,6 +27,7 @@
         NSMutableArray *companysArray = [[Dao sharedDao]companyList];
         CompanyClass *currentCompany = companysArray[self.currentCompanyIndex];
         self.addEditCompanyName.text = currentCompany.companyName;
+        self.addEditTicker.text = currentCompany.stockTicker;
     }
     
 }
@@ -38,9 +39,9 @@
 
 -(void)toggleSaveMode{
     if (self.flagIsAddMod) {
-        [[Dao sharedDao] addNewCompany:self.addEditCompanyName.text];
+        [[Dao sharedDao] addNewCompany:self.addEditCompanyName.text withTicker:self.addEditTicker.text]; 
     } else {
-        [[Dao sharedDao] editCompany:self.addEditCompanyName.text withCompanyIndex:self.currentCompanyIndex];
+        [[Dao sharedDao] editCompany:self.addEditCompanyName.text withTicker:self.addEditTicker.text andCompanyIndex:self.currentCompanyIndex];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -102,6 +103,7 @@
 
 - (void)dealloc {
     [_addEditCompanyName release];
+    [_addEditTicker release];
     [super dealloc];
 }
 @end
