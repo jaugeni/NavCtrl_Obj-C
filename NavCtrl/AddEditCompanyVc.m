@@ -28,7 +28,13 @@
         CompanyClass *currentCompany = companysArray[self.currentCompanyIndex];
         self.addEditCompanyName.text = currentCompany.companyName;
         self.addEditTicker.text = currentCompany.stockTicker;
+        self.addEdditImageCompanyLink.text = currentCompany.companyImageSting;
     }
+    
+    self.addEditCompanyName.delegate = self;
+    self.addEditTicker.delegate = self;
+    self.addEdditImageCompanyLink. delegate = self;
+    
     
 }
 
@@ -39,9 +45,9 @@
 
 -(void)toggleSaveMode{
     if (self.flagIsAddMod) {
-        [[Dao sharedDao] addNewCompany:self.addEditCompanyName.text withTicker:self.addEditTicker.text]; 
+        [[Dao sharedDao] addNewCompany:self.addEditCompanyName.text withTicker:self.addEditTicker.text withImageUrl:self.addEdditImageCompanyLink.text];
     } else {
-        [[Dao sharedDao] editCompany:self.addEditCompanyName.text withTicker:self.addEditTicker.text andCompanyIndex:self.currentCompanyIndex];
+        [[Dao sharedDao]editCompany:self.addEditCompanyName.text withTicker:self.addEditTicker.text withImageUrl:self.addEdditImageCompanyLink.text andCompanyIndex:self.currentCompanyIndex];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -50,60 +56,64 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-// TODO: Make keyboad appear whan I will be have all textfield
 //MARK: move keyboard up
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
-
 #pragma mark - keyboard movements
-- (void)keyboardWillShow:(NSNotification *)notification {
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    float newVerticalPosition = -keyboardSize.height;
-    
-    [self moveFrameToVerticalPosition:newVerticalPosition forDuration:0.3f];
-}
-
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    [self moveFrameToVerticalPosition:0.0f forDuration:0.3f];
-}
-
-
-- (void)moveFrameToVerticalPosition:(float)position forDuration:(float)duration {
-    CGRect frame = self.view.frame;
-    frame.origin.y = position;
-    
-    [UIView animateWithDuration:duration animations:^{
-        self.view.frame = frame;
-    }];
-}
-
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)keyboardWillShow:(NSNotification *)notification
 {
-    [self animateTextField:textField up:YES];
+    if (self.addEdditImageCompanyLink.isFirstResponder){
+        NSValue* keyboardFrameBegin = [[notification userInfo] valueForKey:UIKeyboardFrameEndUserInfoKey];
+        
+        CGRect keyboardFrame = [keyboardFrameBegin CGRectValue];
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect f = self.view.frame;
+            f.origin.y = -keyboardFrame.size.height;
+            self.view.frame = f;
+        }];
+    }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+-(void)keyboardWillHide:(NSNotification *)notification
 {
-    [self animateTextField:textField up:NO];
+    if (self.addEdditImageCompanyLink.isFirstResponder){
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect f = self.view.frame;
+            f.origin.y = 0.0f;
+            self.view.frame = f;
+        }];
+    }
 }
 
 
-*/
+// MARK: textfield
+
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
+}
 
 - (void)dealloc {
     [_addEditCompanyName release];
     [_addEditTicker release];
+    [_addEdditImageCompanyLink release];
     [super dealloc];
 }
 @end

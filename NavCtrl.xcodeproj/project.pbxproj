@@ -13,7 +13,6 @@
 		48A656BF18163BF200746D36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48A656BD18163BF200746D36 /* InfoPlist.strings */; };
 		48A656C118163BF200746D36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A656C018163BF200746D36 /* main.m */; };
 		48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A656C418163BF200746D36 /* NavControllerAppDelegate.m */; };
-		48A656C718163BF200746D36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A656C618163BF200746D36 /* Images.xcassets */; };
 		48A656CE18163BF200746D36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656CD18163BF200746D36 /* XCTest.framework */; };
 		48A656CF18163BF200746D36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656B418163BF200746D36 /* Foundation.framework */; };
 		48A656D018163BF200746D36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656B818163BF200746D36 /* UIKit.framework */; };
@@ -29,6 +28,7 @@
 		A32454B91F745C1900D3D8F1 /* ProductClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454B81F745C1900D3D8F1 /* ProductClass.m */; };
 		A32454BD1F745C4200D3D8F1 /* CompanyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454BC1F745C4200D3D8F1 /* CompanyClass.m */; };
 		A32454C21F746C8200D3D8F1 /* Dao.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454C11F746C8200D3D8F1 /* Dao.m */; };
+		A3AE85CC1F7AEC5600DB8A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3AE85CB1F7AE0B800DB8A4A /* Images.xcassets */; };
 		A3BAF2541F73010700625416 /* ProductLinkVc.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BAF2521F73010700625416 /* ProductLinkVc.m */; };
 		A3BAF2551F73010700625416 /* ProductLinkVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3BAF2531F73010700625416 /* ProductLinkVc.xib */; };
 		A3BAF2571F73226900625416 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BAF2561F73226800625416 /* WebKit.framework */; };
@@ -59,7 +59,6 @@
 		48A656C218163BF200746D36 /* NavCtrl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NavCtrl-Prefix.pch"; sourceTree = "<group>"; };
 		48A656C318163BF200746D36 /* NavControllerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavControllerAppDelegate.h; sourceTree = "<group>"; };
 		48A656C418163BF200746D36 /* NavControllerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavControllerAppDelegate.m; sourceTree = "<group>"; };
-		48A656C618163BF200746D36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		48A656CC18163BF200746D36 /* NavCtrlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavCtrlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A656CD18163BF200746D36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		48A656D518163BF200746D36 /* NavCtrlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NavCtrlTests-Info.plist"; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		A32454BC1F745C4200D3D8F1 /* CompanyClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyClass.m; sourceTree = "<group>"; };
 		A32454C01F746C8200D3D8F1 /* Dao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dao.h; sourceTree = "<group>"; };
 		A32454C11F746C8200D3D8F1 /* Dao.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dao.m; sourceTree = "<group>"; };
+		A3AE85CB1F7AE0B800DB8A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A3BAF2511F73010700625416 /* ProductLinkVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLinkVc.h; sourceTree = "<group>"; };
 		A3BAF2521F73010700625416 /* ProductLinkVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductLinkVc.m; sourceTree = "<group>"; };
 		A3BAF2531F73010700625416 /* ProductLinkVc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductLinkVc.xib; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				A32454BF1F746C5000D3D8F1 /* Dao */,
 				A3122C971F7A9B7C00EAC364 /* StockWork */,
 				48A656BB18163BF200746D36 /* Supporting Files */,
-				48A656C618163BF200746D36 /* Images.xcassets */,
+				A3AE85CB1F7AE0B800DB8A4A /* Images.xcassets */,
 			);
 			path = NavCtrl;
 			sourceTree = "<group>";
@@ -373,13 +373,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3AE85CC1F7AEC5600DB8A4A /* Images.xcassets in Resources */,
 				9E62FF291E4A3982002D55B8 /* Launch Screen.storyboard in Resources */,
 				48A656EE1816468000746D36 /* Sunflower.gif in Resources */,
 				A3F486031F75A149006D15C6 /* AddEditCompanyVc.xib in Resources */,
 				9E62FF221E4A33DC002D55B8 /* CompanyVC.xib in Resources */,
 				9E62FF271E4A33F1002D55B8 /* ProductVC.xib in Resources */,
 				48A656BF18163BF200746D36 /* InfoPlist.strings in Resources */,
-				48A656C718163BF200746D36 /* Images.xcassets in Resources */,
 				A3F486091F75B88D006D15C6 /* AddEditProduct.xib in Resources */,
 				A3BAF2551F73010700625416 /* ProductLinkVc.xib in Resources */,
 			);

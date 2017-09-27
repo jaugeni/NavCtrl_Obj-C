@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddEditCompanyVc">
             <connections>
+                <outlet property="addEdditImageCompanyLink" destination="rj3-Q7-oeb" id="TWO-Bj-YND"/>
                 <outlet property="addEditCompanyName" destination="UBB-YB-Hzy" id="YU7-eH-IVk"/>
                 <outlet property="addEditTicker" destination="vci-jN-6Te" id="ipE-14-qeo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,27 +23,35 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UBB-YB-Hzy">
-                    <rect key="frame" x="32" y="170" width="311" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock ticker" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vci-jN-6Te">
-                    <rect key="frame" x="32" y="216" width="311" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="qDs-CO-bNU">
+                    <rect key="frame" x="32" y="170" width="311" height="154"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UBB-YB-Hzy">
+                            <rect key="frame" x="0.0" y="0.0" width="311" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock ticker" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vci-jN-6Te">
+                            <rect key="frame" x="0.0" y="62" width="311" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Image Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rj3-Q7-oeb">
+                            <rect key="frame" x="0.0" y="124" width="311" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                        </textField>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="UBB-YB-Hzy" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="150" id="4G5-0H-IGB"/>
-                <constraint firstItem="vci-jN-6Te" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="32" id="H9A-zP-DXC"/>
-                <constraint firstItem="vci-jN-6Te" firstAttribute="top" secondItem="UBB-YB-Hzy" secondAttribute="bottom" constant="16" id="NmH-Go-ehd"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="UBB-YB-Hzy" secondAttribute="trailing" constant="32" id="O2k-oX-ewG"/>
-                <constraint firstItem="UBB-YB-Hzy" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="32" id="Wtt-jd-jFU"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="vci-jN-6Te" secondAttribute="trailing" constant="32" id="ZPw-bA-4EP"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="qDs-CO-bNU" secondAttribute="trailing" constant="32" id="MBe-ON-eer"/>
+                <constraint firstItem="qDs-CO-bNU" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="150" id="fxE-ok-Msr"/>
+                <constraint firstItem="qDs-CO-bNU" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="32" id="maa-Nn-xAp"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>

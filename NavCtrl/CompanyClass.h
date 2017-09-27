@@ -12,6 +12,7 @@
 @interface CompanyClass : NSObject
 @property (nonatomic, retain) NSString* companyName;
 @property (nonatomic, retain) NSString* stockTicker;
+@property (nonatomic, retain) NSString* companyImageSting;
 @property (nonatomic, retain) UIImage* companyImage;
 @property (nonatomic, retain) NSString* currentPrice;
 @property (nonatomic, retain) NSMutableArray<ProductClass*>* products;

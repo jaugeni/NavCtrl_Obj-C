@@ -81,15 +81,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //#warning Incomplete method implementation.
-    // Return the number of rows in the section.
+
     return [self.companyList count];
 }
 
@@ -101,11 +98,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
-    UIImage* image;
+
     self.currentCompany = [self.companyList objectAtIndex:[indexPath row]];
-    if ((image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", self.currentCompany.companyName]])) {
-        cell.imageView.image = image;
+    if (self.currentCompany.companyImage) {
+        cell.imageView.image = self.currentCompany.companyImage;
     } else {
         cell.imageView.image = [UIImage imageNamed:@"emptystate-homeView.png"];
     }
@@ -145,17 +141,13 @@
 }
 
 
-////// Override to support conditional rearranging of the table view.
-//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // Return NO if you do not want the item to be re-orderable.
-//    return YES;
-//}
-
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    [self.companyList exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
+    
+    Dao *object = self.companyList[fromIndexPath.row];
+    [self.companyList removeObjectAtIndex: fromIndexPath.row];
+    [self.companyList insertObject:object atIndex:toIndexPath.row];
 }
 
 

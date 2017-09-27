@@ -78,6 +78,11 @@
     
     ProductClass* product = [self.products objectAtIndex:[indexPath row]];
     
+    if (product.productImage) {
+        cell.imageView.image = product.productImage;
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"emptystate-homeView.png"];
+    }
     cell.textLabel.text = product.productName;
     cell.showsReorderControl = YES;
     return cell;

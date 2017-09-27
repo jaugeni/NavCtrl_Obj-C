@@ -25,15 +25,27 @@
     self.navigationItem.rightBarButtonItem = editButton;
 }
 
+- (BOOL) validateUrl: (NSString *) candidate {
+    NSString *urlRegEx = @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+    return [urlTest evaluateWithObject:candidate];
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     
     self.web.frame = self.view.bounds;
-    NSURL *url = [NSURL URLWithString:@"https://www.chase.com"];
-    NSURLRequest *myRequest = [NSURLRequest requestWithURL:url];
-    [self.web loadRequest:myRequest];
+    if([self validateUrl:self.currentProduct.productUrlString]){
+        NSURL *url = self.currentProduct.productUrl;
+        if (url) {
+            NSURLRequest *myRequest = [NSURLRequest requestWithURL:url];
+            [self.web loadRequest:myRequest];
+        }
+    }else{
+        NSLog(@"Not valid URL");
+    }
     
     self.title = self.currentProduct.productName;
-
+    
 }
 
 - (void)toggleEditMode {
