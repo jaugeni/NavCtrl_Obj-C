@@ -15,6 +15,7 @@
                 <outlet property="addEdditImageCompanyLink" destination="rj3-Q7-oeb" id="TWO-Bj-YND"/>
                 <outlet property="addEditCompanyName" destination="UBB-YB-Hzy" id="YU7-eH-IVk"/>
                 <outlet property="addEditTicker" destination="vci-jN-6Te" id="ipE-14-qeo"/>
+                <outlet property="deleteByn" destination="BTg-6f-mRN" id="ZyN-Re-MZ5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,13 +33,13 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock ticker" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vci-jN-6Te">
+                        <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock ticker" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vci-jN-6Te">
                             <rect key="frame" x="0.0" y="62" width="311" height="30"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Image Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rj3-Q7-oeb">
+                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Image Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rj3-Q7-oeb">
                             <rect key="frame" x="0.0" y="124" width="311" height="30"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -46,9 +47,20 @@
                         </textField>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTg-6f-mRN">
+                    <rect key="frame" x="165" y="388" width="45" height="30"/>
+                    <state key="normal" title="Delete">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="gB0-Kl-7fH"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="BTg-6f-mRN" firstAttribute="top" secondItem="qDs-CO-bNU" secondAttribute="bottom" constant="64" id="ESI-1H-p1b"/>
+                <constraint firstItem="BTg-6f-mRN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EWW-4R-hzn"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="qDs-CO-bNU" secondAttribute="trailing" constant="32" id="MBe-ON-eer"/>
                 <constraint firstItem="qDs-CO-bNU" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="150" id="fxE-ok-Msr"/>
                 <constraint firstItem="qDs-CO-bNU" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="32" id="maa-Nn-xAp"/>

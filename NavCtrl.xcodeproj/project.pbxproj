@@ -29,6 +29,8 @@
 		A32454BD1F745C4200D3D8F1 /* CompanyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454BC1F745C4200D3D8F1 /* CompanyClass.m */; };
 		A32454C21F746C8200D3D8F1 /* Dao.m in Sources */ = {isa = PBXBuildFile; fileRef = A32454C11F746C8200D3D8F1 /* Dao.m */; };
 		A3AE85CC1F7AEC5600DB8A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3AE85CB1F7AE0B800DB8A4A /* Images.xcassets */; };
+		A3AE85FE1F7C220600DB8A4A /* NavCtrl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3AE85FC1F7C220600DB8A4A /* NavCtrl.xcdatamodeld */; };
+		A3AE86001F7C410A00DB8A4A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AE85CE1F7C172300DB8A4A /* CoreData.framework */; };
 		A3BAF2541F73010700625416 /* ProductLinkVc.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BAF2521F73010700625416 /* ProductLinkVc.m */; };
 		A3BAF2551F73010700625416 /* ProductLinkVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3BAF2531F73010700625416 /* ProductLinkVc.xib */; };
 		A3BAF2571F73226900625416 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BAF2561F73226800625416 /* WebKit.framework */; };
@@ -81,6 +83,8 @@
 		A32454C01F746C8200D3D8F1 /* Dao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dao.h; sourceTree = "<group>"; };
 		A32454C11F746C8200D3D8F1 /* Dao.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dao.m; sourceTree = "<group>"; };
 		A3AE85CB1F7AE0B800DB8A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A3AE85CE1F7C172300DB8A4A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A3AE85FD1F7C220600DB8A4A /* NavCtrl.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NavCtrl.xcdatamodel; sourceTree = "<group>"; };
 		A3BAF2511F73010700625416 /* ProductLinkVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLinkVc.h; sourceTree = "<group>"; };
 		A3BAF2521F73010700625416 /* ProductLinkVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductLinkVc.m; sourceTree = "<group>"; };
 		A3BAF2531F73010700625416 /* ProductLinkVc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductLinkVc.xib; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3AE86001F7C410A00DB8A4A /* CoreData.framework in Frameworks */,
 				A3BAF2571F73226900625416 /* WebKit.framework in Frameworks */,
 				48A656B718163BF200746D36 /* CoreGraphics.framework in Frameworks */,
 				48A656B918163BF200746D36 /* UIKit.framework in Frameworks */,
@@ -169,6 +174,7 @@
 		48A656B318163BF200746D36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A3AE85CE1F7C172300DB8A4A /* CoreData.framework */,
 				A3BAF2561F73226800625416 /* WebKit.framework */,
 				48A656B418163BF200746D36 /* Foundation.framework */,
 				48A656B618163BF200746D36 /* CoreGraphics.framework */,
@@ -181,6 +187,7 @@
 		48A656BA18163BF200746D36 /* NavCtrl */ = {
 			isa = PBXGroup;
 			children = (
+				A3AE85CD1F7C0F1D00DB8A4A /* Core Date */,
 				483796CB1BCBF7A00062D5AB /* AppDelegate */,
 				483796CC1BCBF7C70062D5AB /* ParentViewController */,
 				483796CD1BCBF7EB0062D5AB /* ProductViewController */,
@@ -262,6 +269,14 @@
 				A32454C11F746C8200D3D8F1 /* Dao.m */,
 			);
 			name = Dao;
+			sourceTree = "<group>";
+		};
+		A3AE85CD1F7C0F1D00DB8A4A /* Core Date */ = {
+			isa = PBXGroup;
+			children = (
+				A3AE85FC1F7C220600DB8A4A /* NavCtrl.xcdatamodeld */,
+			);
+			name = "Core Date";
 			sourceTree = "<group>";
 		};
 		A3BAF24F1F72FEC900625416 /* ProductLinkVC */ = {
@@ -402,6 +417,7 @@
 			files = (
 				A3F486081F75B88D006D15C6 /* AddEditProduct.m in Sources */,
 				9E62FF211E4A33DC002D55B8 /* CompanyVC.m in Sources */,
+				A3AE85FE1F7C220600DB8A4A /* NavCtrl.xcdatamodeld in Sources */,
 				A3122C961F7A99B600EAC364 /* StockWork.m in Sources */,
 				A32454BD1F745C4200D3D8F1 /* CompanyClass.m in Sources */,
 				A3F486021F75A149006D15C6 /* AddEditCompanyVc.m in Sources */,
@@ -459,7 +475,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -510,7 +526,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -656,6 +672,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A3AE85FC1F7C220600DB8A4A /* NavCtrl.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A3AE85FD1F7C220600DB8A4A /* NavCtrl.xcdatamodel */,
+			);
+			currentVersion = A3AE85FD1F7C220600DB8A4A /* NavCtrl.xcdatamodel */;
+			path = NavCtrl.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 48A656A918163BF200746D36 /* Project object */;
 }

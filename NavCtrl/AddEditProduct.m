@@ -24,9 +24,13 @@
     self.navigationItem.leftBarButtonItem = cancelButton;
     
     if(!self.flagIsAddMod){
+        
         self.addEditProductName.text = self.currentProduct.productName;
         self.addEditingProductLink.text = self.currentProduct.productUrlString;
         self.addEditImageProduct.text = self.currentProduct.productImageString;
+        self.deleteBtn.hidden = NO;
+    } else {
+        self.deleteBtn.hidden = YES;
     }
     
     self.addEditProductName.delegate = self;
@@ -41,11 +45,12 @@
 
 -(void)toggleSaveMode{
     if (self.flagIsAddMod) {
-        [[Dao sharedDao] addNewProduct:self.addEditProductName.text withProductLink:self.addEditingProductLink.text withImageUrl:self.addEditImageProduct.text andCompany:self.product];
+        
+        [[Dao sharedDao] addNewProduct:self.addEditProductName.text withProductLink:self.addEditingProductLink.text withImageUrl:self.addEditImageProduct.text andCompanyIndex:self.currentCompanyIndex];
         
     } else {
         
-        [[Dao sharedDao] editProduct:self.addEditProductName.text withProductLink:self.addEditingProductLink.text withImageUrl:self.addEditImageProduct.text withProduct:self.currentProduct andProductIndex:self.self.currentProductIndex];
+        [[Dao sharedDao] editProduct:self.addEditProductName.text withProductLink:self.addEditingProductLink.text withImageUrl:self.addEditImageProduct.text withCompanyIndex:self.currentCompanyIndex andProductIndex:self.currentProductIndex];
     }
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -53,6 +58,13 @@
 
 -(void)toggleCancelMode{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)deletePressed:(id)sender {
+    [[Dao sharedDao] deleteCurrentProductByIndex:self.currentProductIndex withCompanyIndex:self.currentCompanyIndex];
+    
+    NSArray *array = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
 }
 
 //MARK: move keyboard up
@@ -72,46 +84,60 @@
 #pragma mark - keyboard movements
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    if (self.addEditImageProduct.isFirstResponder){
+    
         NSValue* keyboardFrameBegin = [[notification userInfo] valueForKey:UIKeyboardFrameEndUserInfoKey];
         
         CGRect keyboardFrame = [keyboardFrameBegin CGRectValue];
         [UIView animateWithDuration:0.3 animations:^{
             CGRect f = self.view.frame;
-            f.origin.y = -keyboardFrame.size.height;
+            f.origin.y = -keyboardFrame.size.height + 90;
             self.view.frame = f;
         }];
-    }
+    
 }
 
 -(void)keyboardWillHide:(NSNotification *)notification
 {
-    if (self.addEditImageProduct.isFirstResponder){
+
         [UIView animateWithDuration:0.3 animations:^{
             CGRect f = self.view.frame;
             f.origin.y = 0.0f;
             self.view.frame = f;
         }];
-    }
 }
 
 
 // MARK: textfield
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+  
+}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    
-    return YES;
+    NSInteger nextTag = textField.tag + 1;
+    // Try to find next responder
+    UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        // Found next responder, so set it.
+        [nextResponder becomeFirstResponder];
+    } else {
+        // Not found, so remove keyboard.
+        [textField resignFirstResponder];
+    }
+    return NO;
 }
+
 - (void)dealloc {
     [_addEditProductName release];
     [_addEditingProductLink release];
     [_addEditImageProduct release];
+    [_deleteBtn release];
     [super dealloc];
 }
+
 @end

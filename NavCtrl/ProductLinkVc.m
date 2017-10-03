@@ -17,16 +17,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
+     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn-navBack"] style:NO target:self action:@selector(toggleBackMode)];
     
     self.web = [WKWebView new];
     
     [self.view addSubview:self.web];
     
     self.navigationItem.rightBarButtonItem = editButton;
+    self.navigationItem.leftBarButtonItem = backBtn;
 }
 
 - (BOOL) validateUrl: (NSString *) candidate {
-    NSString *urlRegEx = @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    NSString *urlRegEx = @"http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&amp;=]*)?";
     NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
     return [urlTest evaluateWithObject:candidate];
 }
@@ -35,11 +37,9 @@
     
     self.web.frame = self.view.bounds;
     if([self validateUrl:self.currentProduct.productUrlString]){
-        NSURL *url = self.currentProduct.productUrl;
-        if (url) {
+        NSURL *url = [NSURL URLWithString: self.currentProduct.productUrlString];
             NSURLRequest *myRequest = [NSURLRequest requestWithURL:url];
             [self.web loadRequest:myRequest];
-        }
     }else{
         NSLog(@"Not valid URL");
     }
@@ -54,7 +54,12 @@
     addEditProductVC.flagIsAddMod = NO;
     addEditProductVC.currentProductIndex = self.currentProductIndex;
     addEditProductVC.currentProduct = self.currentProduct;
+    addEditProductVC.currentCompanyIndex = self.currentCompanytIndex;
     [self.navigationController pushViewController:addEditProductVC animated:YES];
+}
+
+-(void)toggleBackMode{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

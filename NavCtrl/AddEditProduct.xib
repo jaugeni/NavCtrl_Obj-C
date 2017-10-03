@@ -15,6 +15,7 @@
                 <outlet property="addEditImageProduct" destination="SaM-bv-apv" id="PDR-4V-VPp"/>
                 <outlet property="addEditProductName" destination="FGq-Oa-Jko" id="WYP-g3-8Sg"/>
                 <outlet property="addEditingProductLink" destination="KE5-20-Nqw" id="h9E-Ml-Iss"/>
+                <outlet property="deleteBtn" destination="gDs-ij-Em4" id="wmi-MP-1nP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="ySJ-Gk-BxU"/>
             </connections>
         </placeholder>
@@ -32,13 +33,13 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KE5-20-Nqw">
+                        <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KE5-20-Nqw">
                             <rect key="frame" x="0.0" y="62" width="311" height="30"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Image link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SaM-bv-apv">
+                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Image link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SaM-bv-apv">
                             <rect key="frame" x="0.0" y="124" width="311" height="30"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -46,11 +47,22 @@
                         </textField>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDs-ij-Em4">
+                    <rect key="frame" x="165.5" y="388" width="45" height="30"/>
+                    <state key="normal" title="Delete">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="DQy-jj-IrE"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="9ps-Zg-CYA" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="150" id="Fca-wW-B0N"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="9ps-Zg-CYA" secondAttribute="trailing" constant="32" id="GyT-nJ-ThQ"/>
+                <constraint firstItem="gDs-ij-Em4" firstAttribute="top" secondItem="9ps-Zg-CYA" secondAttribute="bottom" constant="64" id="UYD-OL-MOw"/>
+                <constraint firstItem="gDs-ij-Em4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="V2n-Yt-BoO"/>
                 <constraint firstItem="9ps-Zg-CYA" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="32" id="hTy-j2-RoG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

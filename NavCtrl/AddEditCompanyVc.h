@@ -10,10 +10,12 @@
 #import "Dao.h"
 
 @interface AddEditCompanyVc : UIViewController<UITextFieldDelegate>
+@property (retain, nonatomic) IBOutlet UIButton *deleteByn;
 
 @property (retain, nonatomic) IBOutlet UITextField *addEditCompanyName;
 @property (retain, nonatomic) IBOutlet UITextField *addEditTicker;
 @property (retain, nonatomic) IBOutlet UITextField *addEdditImageCompanyLink;
+- (IBAction)deletePressed:(id)sender;
 
 @property (nonatomic) BOOL flagIsAddMod;
 @property (nonatomic) int currentCompanyIndex;

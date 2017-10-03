@@ -29,6 +29,9 @@
         self.addEditCompanyName.text = currentCompany.companyName;
         self.addEditTicker.text = currentCompany.stockTicker;
         self.addEdditImageCompanyLink.text = currentCompany.companyImageSting;
+        self.deleteByn.hidden = NO;
+    } else {
+        self.deleteByn.hidden = YES;
     }
     
     self.addEditCompanyName.delegate = self;
@@ -49,6 +52,12 @@
     } else {
         [[Dao sharedDao]editCompany:self.addEditCompanyName.text withTicker:self.addEditTicker.text withImageUrl:self.addEdditImageCompanyLink.text andCompanyIndex:self.currentCompanyIndex];
     }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)deletePressed:(id)sender {
+    
+    [[Dao sharedDao] deleteCurrentCompanyByIndex:self.currentCompanyIndex];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -73,47 +82,68 @@
 #pragma mark - keyboard movements
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    if (self.addEdditImageCompanyLink.isFirstResponder){
+    
         NSValue* keyboardFrameBegin = [[notification userInfo] valueForKey:UIKeyboardFrameEndUserInfoKey];
         
         CGRect keyboardFrame = [keyboardFrameBegin CGRectValue];
         [UIView animateWithDuration:0.3 animations:^{
             CGRect f = self.view.frame;
-            f.origin.y = -keyboardFrame.size.height;
+            f.origin.y = -keyboardFrame.size.height + 90;
             self.view.frame = f;
         }];
-    }
+    
 }
 
 -(void)keyboardWillHide:(NSNotification *)notification
 {
-    if (self.addEdditImageCompanyLink.isFirstResponder){
-        [UIView animateWithDuration:0.3 animations:^{
-            CGRect f = self.view.frame;
-            f.origin.y = 0.0f;
-            self.view.frame = f;
-        }];
-    }
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = 0.0f;
+        self.view.frame = f;
+    }];
 }
 
 
 // MARK: textfield
 
+//-(void)textFieldDidBeginEditing:(UITextField *)textField{
+//
+//    if (self.addEdditImageCompanyLink.isFirstResponder){
+//        NSNotification *notification = nil;
+//        NSValue* keyboardFrameBegin = [[notification userInfo] valueForKey:UIKeyboardFrameEndUserInfoKey];
+//
+//        CGRect keyboardFrame = [keyboardFrameBegin CGRectValue];
+//        [UIView animateWithDuration:0.3 animations:^{
+//            CGRect f = self.view.frame;
+//            f.origin.y = -keyboardFrame.size.height;
+//            self.view.frame = f;
+//        }];
+//    }
+//}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    
-    return YES;
+    NSInteger nextTag = textField.tag + 1;
+    // Try to find next responder
+    UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        // Found next responder, so set it.
+        [nextResponder becomeFirstResponder];
+    } else {
+        // Not found, so remove keyboard.
+        [textField resignFirstResponder];
+    }
+    return NO;
 }
 
 - (void)dealloc {
     [_addEditCompanyName release];
     [_addEditTicker release];
     [_addEdditImageCompanyLink release];
+    [_deleteByn release];
     [super dealloc];
 }
 @end

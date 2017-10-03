@@ -15,6 +15,6 @@
 @property (retain, nonatomic)  WKWebView *web;
 @property (nonatomic) int currentProductIndex;
 @property (retain, nonatomic) ProductClass *currentProduct;
-
+@property (nonatomic) int currentCompanytIndex;
 
 @end

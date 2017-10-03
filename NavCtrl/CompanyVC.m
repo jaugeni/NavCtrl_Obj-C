@@ -12,7 +12,7 @@
 
 
 @interface CompanyVC ()
-
+@property NSTimer *timer;
 
 @end
 
@@ -21,32 +21,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditMode)];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(toggleAddMode)];
     
     self.navigationItem.leftBarButtonItem = editButton;
     self.navigationItem.rightBarButtonItem = addButton;
+    self.navigationController.navigationBar.barTintColor = [UIColor greenColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     self.title = @"Company";
     
     Dao *dao = [Dao sharedDao];
     self.companyList = dao.companyList;
-
-    // Do any additional setup after loading the view from its nib.
+    [self redoUndoHidden:YES];
     
-
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"ReloadTable" object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     self.companyList = [[Dao sharedDao] companyList];
+    [self.tableView reloadData];
+    
     self.tableView.editing = NO;
     self.navigationItem.leftBarButtonItem.title = @"Edit";
+    
+    [self redoUndoHidden:YES];
+    [self timerForStack];
+
+}
+
+- (void)reloadTableView{
+    [self.companyList removeAllObjects];
+    self.companyList = [[Dao sharedDao] companyList];
     [self.tableView reloadData];
-    StockWork* stockWork = [[StockWork alloc] init];
-    [stockWork getStockPrice];
-    [stockWork setTable:self.tableView];
+    [self updateStck];
 }
 
 - (void)toggleEditMode {
@@ -56,10 +65,12 @@
         self.tableView.allowsSelectionDuringEditing = NO;
         self.navigationItem.leftBarButtonItem.title = @"Edit";
         [self.tableView reloadData];
+        [self redoUndoHidden:YES];
     } else {
         [self.tableView setEditing:YES animated:NO];
         self.tableView.allowsSelectionDuringEditing = YES;
         self.navigationItem.leftBarButtonItem.title = @"Done";
+        [self redoUndoHidden:NO];
     }
     
 }
@@ -77,6 +88,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)redoPressed:(id)sender {
+    [[Dao sharedDao] redo];
+}
+
+- (IBAction)undoPressed:(id)sender {
+    [[Dao sharedDao] undo];
+}
+
+-(void)redoUndoHidden:(BOOL)hidden{
+    self.undoBtn.hidden = hidden;
+    self.redoBtn.hidden = hidden;
+    self.undoRedoBtnStock.hidden = hidden;
+}
+
+-(void)updateStck{
+    StockWork* stockWork = [[StockWork alloc] init];
+    [stockWork getStockPrice];
+    [stockWork setTable:self.tableView];
+}
+
+-(void)timerForStack{
+    [self.timer invalidate];
+    self.timer = nil;
+    [self updateStck];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(updateStck) userInfo:nil repeats:YES];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -86,7 +124,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
+    
     return [self.companyList count];
 }
 
@@ -98,16 +136,30 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-
     self.currentCompany = [self.companyList objectAtIndex:[indexPath row]];
-    if (self.currentCompany.companyImage) {
-        cell.imageView.image = self.currentCompany.companyImage;
-    } else {
+    
+    NSURL *url = [NSURL URLWithString: self.currentCompany.companyImageSting];
+    UIImage* companyImage = [UIImage imageWithData: [NSData dataWithContentsOfURL: url]];
+    if (companyImage) {
+        cell.imageView.image = companyImage;
+    }else{
         cell.imageView.image = [UIImage imageNamed:@"emptystate-homeView.png"];
     }
+    CGSize itemSize = CGSizeMake(40, 40);
+    UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+    CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+    [cell.imageView.image drawInRect:imageRect];
+    cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.currentCompany.companyName, self.currentCompany.stockTicker];
     cell.detailTextLabel.text = self.currentCompany.currentPrice;
+    [cell.detailTextLabel setTextColor: [UIColor grayColor]];
     cell.showsReorderControl = YES;
+    
+    cell.preservesSuperviewLayoutMargins = false;
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.layoutMargins = UIEdgeInsetsZero;
+    
     
     return cell;
 }
@@ -129,19 +181,11 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        
-        [self.companyList removeObjectAtIndex:indexPath.row];
+        [[Dao sharedDao] deleteCurrentCompanyByIndex:(int)indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        
-        
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
 }
 
-
-// Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     
@@ -172,27 +216,19 @@
         self.productViewController = [[ProductVC alloc]init];
         self.productViewController.title = self.currentCompany.companyName;
         self.productViewController.products = self.currentCompany.products;
+        self.productViewController.currentCompanyIndex = (int) indexPath.row;
         
-        
-        [self.navigationController
-         pushViewController:self.productViewController
-         animated:YES];
+        [self.navigationController pushViewController:self.productViewController animated:YES];
     }
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 - (void)dealloc {
     [_tableView release];
+    [_redoBtn release];
+    [_undoBtn release];
+    [_undoRedoBtnStock release];
     [super dealloc];
 }
 @end
