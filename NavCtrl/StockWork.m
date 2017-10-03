@@ -18,9 +18,17 @@
     for (int i = 0; i < companyList.count; i++) {
         CompanyClass* currentCompany = companyList[i];
         if (i == companyList.count - 1){
-            [tickers appendFormat:@"%@", currentCompany.stockTicker];
+            if ([currentCompany.stockTicker isEqualToString:@""]){
+                [tickers appendFormat: @"N/a"];
+            } else {
+                [tickers appendFormat:@"%@", currentCompany.stockTicker];
+            }
         } else {
-            [tickers appendFormat:@"%@+", currentCompany.stockTicker];
+            if ([currentCompany.stockTicker isEqualToString:@""]){
+                [tickers appendFormat: @"N/a"];
+            } else {
+                [tickers appendFormat:@"%@+", currentCompany.stockTicker];
+            }
         }
     }
     NSString *url= [NSString stringWithFormat: @"https://download.finance.yahoo.com/d/quotes.csv?s=%@&f=nl1",tickers];
@@ -37,11 +45,11 @@
                                                       CompanyClass* currentCompany = companyList[i];
                                                       NSArray *getPrice = [seporetByCompany[i] componentsSeparatedByString:@","];
                                                       currentCompany.currentPrice = getPrice[getPrice.count - 1];
-
+                                                      
                                                       dispatch_async(dispatch_get_main_queue(), ^{
                                                           [self.table reloadData];
                                                       });
-
+                                                      
                                                       
                                                       
                                                   }

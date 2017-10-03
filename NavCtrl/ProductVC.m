@@ -72,7 +72,23 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (self.products.count > 0) {
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        return 1;
+        
+    } else {
+        UIButton *messageButtom = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        [messageButtom setTitle:@"+Add Product" forState:UIControlStateNormal];
+        [messageButtom setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
+        [messageButtom addTarget:self action:@selector(toggleAddMode) forControlEvents:UIControlEventTouchUpInside];
+
+        self.tableView.backgroundView = messageButtom;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

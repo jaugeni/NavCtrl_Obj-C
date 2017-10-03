@@ -36,7 +36,7 @@
     self.companyList = dao.companyList;
     [self redoUndoHidden:YES];
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"ReloadTable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"ReloadTable" object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -48,7 +48,7 @@
     
     [self redoUndoHidden:YES];
     [self timerForStack];
-
+    
 }
 
 - (void)reloadTableView{
@@ -120,6 +120,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
